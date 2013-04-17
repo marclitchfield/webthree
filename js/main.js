@@ -6,11 +6,21 @@
 
 		scene = new THREE.Scene();
 		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
-		camera.position.z = 500;
+		//camera = new THREE.OrthographicCamera(window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000);
+		camera.position.z = 100;
 		scene.add(camera);
 
-		geometry = new THREE.CubeGeometry(300,300,300);
-		material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
+		//geometry = new THREE.CubeGeometry(300,300,300);
+		geometry = new THREE.OctahedronGeometry(30, 6);
+		geometry.vertices.push(new THREE.Vector3(-10, 10, 0));
+		geometry.vertices.push(new THREE.Vector3(-10,-10, 0));
+		geometry.vertices.push(new THREE.Vector3( 10,-10, 0));
+		geometry.vertices.push(new THREE.Vector3( 10, 10, 0));
+		geometry.faces.push(new THREE.Face3(0, 1, 2));
+		geometry.faces.push(new THREE.Face3(0, 2, 3));
+		//geometry.computeBoundingSphere();
+
+		material = new THREE.MeshBasicMaterial({ color: 0x6200ff, wireframe: true });
 		mesh = new THREE.Mesh(geometry, material);
 		scene.add(mesh);
 
@@ -26,6 +36,7 @@
 
 		mesh.rotation.x += 0.002;
 		mesh.rotation.y += 0.02;
+		camera.position.z -= 0.1;
 
 		renderer.render(scene, camera);
 	};
