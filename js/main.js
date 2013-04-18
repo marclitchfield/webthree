@@ -1,6 +1,6 @@
 (function(window) {
 
-	var scene, camera, geometry, material, mesh, renderer;
+	var scene, camera, geometry, material, mesh, light, renderer;
 
 	window.init = function() {
 
@@ -13,9 +13,13 @@
 		//geometry = new THREE.CubeGeometry(300,300,300);
 		geometry = new THREE.OctahedronGeometry(30, 5);
 
-		material = new THREE.MeshBasicMaterial({ color: 0x6200ff, wireframe: true });
+		material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('img/moon.jpg'), wireframe:false });
 		mesh = new THREE.Mesh(geometry, material);
 		scene.add(mesh);
+
+		light = new THREE.PointLight(0xFFFFFF);
+		light.position.set(10, 50, 120);
+		scene.add(light);
 
 		renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
@@ -28,8 +32,11 @@
 		window.requestAnimationFrame(window.animate);
 
 		mesh.rotation.x += 0.002;
-		mesh.rotation.y += 0.02;
+		mesh.rotation.y += 0.015;
 		camera.position.z -= 0.1;
+
+		light.position.x -= 0.3;
+		light.position.z -= 0.3;
 
 		renderer.render(scene, camera);
 	};
