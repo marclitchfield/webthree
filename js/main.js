@@ -11,14 +11,7 @@
 		scene.add(camera);
 
 		//geometry = new THREE.CubeGeometry(300,300,300);
-		geometry = new THREE.OctahedronGeometry(30, 6);
-		geometry.vertices.push(new THREE.Vector3(-10, 10, 0));
-		geometry.vertices.push(new THREE.Vector3(-10,-10, 0));
-		geometry.vertices.push(new THREE.Vector3( 10,-10, 0));
-		geometry.vertices.push(new THREE.Vector3( 10, 10, 0));
-		geometry.faces.push(new THREE.Face3(0, 1, 2));
-		geometry.faces.push(new THREE.Face3(0, 2, 3));
-		//geometry.computeBoundingSphere();
+		geometry = new THREE.OctahedronGeometry(30, 5);
 
 		material = new THREE.MeshBasicMaterial({ color: 0x6200ff, wireframe: true });
 		mesh = new THREE.Mesh(geometry, material);
